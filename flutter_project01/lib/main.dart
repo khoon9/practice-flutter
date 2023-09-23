@@ -16,84 +16,52 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: 100,
-                  height: 80,
-                  color: Colors.red,
-                  child: Text('Container 01'),
-                ),
-                Container(
-                  width: 100,
-                  height: 80,
-                  color: Colors.blue,
-                  child: Text('Container 02'),
-                ),
-                Container(
-                  width: 100,
-                  height: 80,
-                  color: Colors.green,
-                  child: Text('Container 03'),
-                ),
-              ],
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
-            Container(
-              width: 300,
-              height: 120,
-              color: Colors.black26,
-              child: Text("Container 04"),
-            ),
+    return Column(
+      children: [
+        Container(
+        width: 100,
+        height: 100,
+        color: Colors.red,
+        margin: const EdgeInsets.symmetric(vertical: 8),),
+        Container(
+        width: 100,
+        height: 100,
+        color: Colors.red,
+        margin: const EdgeInsets.symmetric(vertical: 8),),
 
-          ],
+        Expanded(
+          child: Container(
+            width: 100,
+            height: 100,
+            color: Colors.red,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
+                ],
+              ),
+            )
+          ),
+        ),
+        Container(
+          width: 100,
+          height: 100,
+          color: Colors.red,
+          margin: const EdgeInsets.symmetric(vertical: 8),),
 
-        )
+      ],
     );
   }
 }
