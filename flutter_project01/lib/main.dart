@@ -1,54 +1,43 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        title: Text("플러터"),
-      ),
-      body: Body(),
-    ),
+  runApp(const MaterialApp(
+    home: HomeWidget(),
   ));
 }
 
-class Body extends StatelessWidget {
-  const Body({super.key});
+class HomeWidget extends StatelessWidget {
+  const HomeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return const SafeArea(
+      child: Scaffold(body: ConstraintsWidget()),
+    );
+  }
+}
+
+class ConstraintsWidget extends StatelessWidget {
+  const ConstraintsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       children: [
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            width: 300,
-            height: 300,
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(150),
-
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            width: 280,
-            height: 280,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(140),
-
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Text(
-            'Count 8',
-            style: TextStyle(color: Colors.blue, fontSize: 30),
-          ),
-        )
+        Expanded(
+            child: Container(
+                color: Colors.blue,
+                child: Text(
+                  'HelloWorld!HelloWorld!HelloWorld!HelloWorld!HelloWorld!HelloWorld!HelloWorld!HelloWorld!HelloWorld!HelloWorld!',
+                  style: TextStyle(fontSize: 30),
+                ))),
+        Expanded(
+            child: Container(
+                color: Colors.red,
+                child: Text(
+                  'HelloWorld!',
+                  style: TextStyle(fontSize: 30),
+                ))),
       ],
     );
   }
