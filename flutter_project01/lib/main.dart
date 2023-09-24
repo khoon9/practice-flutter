@@ -4,7 +4,7 @@ void main() {
   runApp(MaterialApp(
     home: Scaffold(
       appBar: AppBar(
-        title: Text("위젯 상하좌우로 배치"),
+        title: Text("플러터"),
       ),
       body: Body(),
     ),
@@ -16,51 +16,39 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Container(
-        width: 100,
-        height: 100,
-        color: Colors.red,
-        margin: const EdgeInsets.symmetric(vertical: 8),),
-        Container(
-        width: 100,
-        height: 100,
-        color: Colors.red,
-        margin: const EdgeInsets.symmetric(vertical: 8),),
-
-        Expanded(
+        Align(
+          alignment: Alignment.center,
           child: Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                  Container(color: Colors.blue, height: 50, width: 50,margin: const EdgeInsets.symmetric(vertical: 8)),
-                ],
-              ),
-            )
+            width: 300,
+            height: 300,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(150),
+
+            ),
           ),
         ),
-        Container(
-          width: 100,
-          height: 100,
-          color: Colors.red,
-          margin: const EdgeInsets.symmetric(vertical: 8),),
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: 280,
+            height: 280,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(140),
 
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            'Count 8',
+            style: TextStyle(color: Colors.blue, fontSize: 30),
+          ),
+        )
       ],
     );
   }
