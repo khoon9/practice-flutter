@@ -16,79 +16,79 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        ExampleStateless(),
-        ExampleStateful(index: 3),
+        // TestCheckBox(),
+        TestRadioButton(),
       ],
     );
   }
 }
 
-class ExampleStateless extends StatelessWidget {
-  const ExampleStateless({super.key});
+class TestCheckBox extends StatefulWidget {
+  const TestCheckBox({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: Colors.red,
-      ),
-    );
-  }
+  State<TestCheckBox> createState() => _TestCheckBoxState();
 }
 
-class ExampleStateful extends StatefulWidget {
-  final int index;
+class _TestCheckBoxState extends State<TestCheckBox> {
+  late List<bool> values;
 
-  const ExampleStateful({required this.index,super.key});
-
-  @override
-  State<ExampleStateful> createState() => _ExampleStatefulState();
-}
-class _ExampleStatefulState extends State<ExampleStateful> {
-  // 언더바 는 private 변수를 의미한다
-  late int _index;
-  late TextEditingController textEditingController;
 
   @override
   void initState() {
     super.initState();
-    _index = widget.index;
-    textEditingController = TextEditingController();
-  }
-
-  // 이 안에서 Stream 을 사용하거나 다른 네트워크 통신 객체를 가져가서 쓴다던지
-  // 스크롤 컨트롤러나 텍스트 컨트롤러 객체들이 상황 종결임을 알려주는 역할을 수행하여 리소스를 반환
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
+    values = [false, false, false];
   }
 
   @override
   Widget build(BuildContext context) {
-    // GestureDetector 란 위젯안에서 특정한 엑션에 대해 감지하는 역할을 수행한다.
-    return Expanded(
-      child: GestureDetector(
-        onTap: (){
-          // state 가 바뀌었다는 걸 위젯한테 알려준다.
-          setState(() {
-
-          });
-          if(_index == 5){
-            _index = 0;
-            return;
-          }
-          _index++;
-        },
-        child: Container(
-        color: Colors.green.withOpacity(_index/5),
-          child: Center(
-            child: Text('$_index'),
-          ),
-        ),
-      ),
+    return Row(
+      children: [
+        Checkbox(value: values[0], onChanged: (value) => changeValue(0, value: value)),
+        Checkbox(value: values[1], onChanged: (value) => changeValue(1, value: value)),
+        Checkbox(value: values[2], onChanged: (value) => changeValue(2, value: value)),
+      ],
     );
   }
+
+  void changeValue(int index, {bool? value = false}){
+    setState(() {
+      values[index] = value!;
+    });
+  }
+
 }
+
+class TestRadioButton extends StatefulWidget {
+  const TestRadioButton({super.key});
+
+  @override
+  State<TestRadioButton> createState() => _TestRadioButtonState();
+}
+
+enum TestRadioValue{
+  test1,
+  test2,
+  test3,
+}
+
+class _TestRadioButtonState extends State<TestRadioButton> {
+  TestRadioValue? selectValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Radio<TestRadioValue>(value: TestRadioValue.test1, groupValue: selectValue, onChanged: (value)=> changeValue(value!)),
+        Radio<TestRadioValue>(value: TestRadioValue.test2, groupValue: selectValue, onChanged: (value)=> changeValue(value!)),
+        Radio<TestRadioValue>(value: TestRadioValue.test3, groupValue: selectValue, onChanged: (value)=> changeValue(value!)),
+      ],
+    );
+  }
+  void changeValue(TestRadioValue value) {
+    setState(() => selectValue = value);
+  }
+}
+
