@@ -19,202 +19,71 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // TestCheckBox(),
-        // TestRadioButton(),
-        // TestSlider(),
-        TestSwitch(),
-        // TestPopupMenu(),
-      ],
-    );
+    return TestWidget();
   }
 }
 
-class TestCheckBox extends StatefulWidget {
-  const TestCheckBox({super.key});
+class TestWidget extends StatefulWidget {
+  const TestWidget({super.key});
 
   @override
-  State<TestCheckBox> createState() => _TestCheckBoxState();
+  State<TestWidget> createState() => _TestWidgetState();
 }
 
-class _TestCheckBoxState extends State<TestCheckBox> {
-  late List<bool> values;
+class _TestWidgetState extends State<TestWidget> {
+  late int value;
 
   @override
   void initState() {
     super.initState();
-    values = [false, false, false];
+    value = 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Checkbox(
-            value: values[0],
-            onChanged: (value) => changeValue(0, value: value)),
-        Checkbox(
-            value: values[1],
-            onChanged: (value) => changeValue(1, value: value)),
-        Checkbox(
-            value: values[2],
-            onChanged: (value) => changeValue(2, value: value)),
-      ],
-    );
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Text(
+        'Count : $value',
+        style: const TextStyle(fontSize: 30),
+      ),
+      // addCounter 메소드 그 자체를 넘겨주는 것이다.
+      TestButton(addCounter),
+    ]);
   }
 
-  void changeValue(int index, {bool? value = false}) {
-    setState(() {
-      values[index] = value!;
-    });
-  }
+  // statefull 에서 setState 을 포함한 메소드를 선언하고
+  // stateless 에서 그 메소드를 호출할 수 있도록 할 수 있음을 보여준다.
+  // void addCounter() => setState(() => value++);
+  void addCounter(int addValue) => setState(() => value+=addValue);
+
 }
 
-class TestRadioButton extends StatefulWidget {
-  const TestRadioButton({super.key});
+class TestButton extends StatelessWidget {
+  // 네임드 파라미터외에 밖에다가 callback 선언
+  const TestButton(this.callback, {super.key});
 
-  @override
-  State<TestRadioButton> createState() => _TestRadioButtonState();
-}
-
-enum TestValue {
-  test1,
-  test2,
-  test3,
-}
-
-class _TestRadioButtonState extends State<TestRadioButton> {
-  TestValue? selectValue;
+  // 반환값이 없는 콜벡으로 넘겨줄 때 가장 많이 사용
+  // final VoidCallback callback;
+  final Function(int) callback;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          leading: Radio<TestValue>(
-              value: TestValue.test1,
-              groupValue: selectValue,
-              onChanged: (value) => changeValue(value!)),
-          title: Text(TestValue.test1.name),
-          onTap: () => changeValue(TestValue.test1),
-        ),
-        Radio<TestValue>(
-            value: TestValue.test2,
-            groupValue: selectValue,
-            onChanged: (value) => changeValue(value!)),
-        Radio<TestValue>(
-            value: TestValue.test3,
-            groupValue: selectValue,
-            onChanged: (value) => changeValue(value!)),
-      ],
-    );
-  }
-
-  void changeValue(TestValue value) {
-    setState(() => selectValue = value);
-  }
-}
-
-class TestSlider extends StatefulWidget {
-  const TestSlider({super.key});
-
-  @override
-  State<TestSlider> createState() => _TestSliderState();
-}
-
-class _TestSliderState extends State<TestSlider> {
-  late double value;
-
-  @override
-  void initState() {
-    super.initState();
-    this.value = 0.0;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          '${value.round()}',
-          style: TextStyle(fontSize: 30),
-        ),
-        Slider(
-          value: value,
-          onChanged: (newValue) => setState(() => value = newValue),
-          max: 100,
-          min: 0,
-          divisions: 100,
-          label: value.round().toString(),
-          activeColor: Colors.red,
-        ),
-      ],
-    );
-  }
-}
-
-class TestSwitch extends StatefulWidget {
-  const TestSwitch({super.key});
-
-  @override
-  State<TestSwitch> createState() => _TestSwitchState();
-}
-
-class _TestSwitchState extends State<TestSwitch> {
-  late bool value01;
-  late bool value02;
-
-  @override
-  void initState() {
-    super.initState();
-    this.value01 = false;
-    this.value02 = false;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Switch(
-            value: value01,
-            onChanged: (newValue) => setState(() => value01 = newValue)),
-        CupertinoSwitch(
-            value: value02,
-            onChanged: (newValue) => setState(() => value02 = newValue))
-      ],
-    );
-  }
-}
-
-class TestPopupMenu extends StatefulWidget {
-  const TestPopupMenu({super.key});
-
-  @override
-  State<TestPopupMenu> createState() => _TestPopupMenuState();
-}
-
-class _TestPopupMenuState extends State<TestPopupMenu> {
-  late TestValue selectValue;
-
-  @override
-  void initState() {
-    super.initState();
-    selectValue = TestValue.test1;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(selectValue.name),
-        PopupMenuButton(itemBuilder: (context) {
-          return TestValue.values
-              .map((value) =>
-                  PopupMenuItem(value: value, child: Text(value.name)))
-              .toList();
-        }, onSelected: (newValue)=>setState(() => selectValue = newValue),),
-      ],
-    );
+    return Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        width: double.infinity,
+        // inkwell 또한 있다. 이는 클릭시 화면이 번지는 듯한 애니메이션이 기본으로있어서 빠른 코딩 용이
+        // GestureDetector 가 더 다양한 기능이 존재.
+        // onTap 과 longTap 이 자주 쓰임
+        child: InkWell(
+          onTap: () => callback.call(5),
+            child: Center(
+              child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  decoration: BoxDecoration(border: Border.all()),
+                  child: const Text(
+          'Up count',
+          style: TextStyle(fontSize: 24),
+        ),),
+            ),),);
   }
 }
