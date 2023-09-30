@@ -20,7 +20,6 @@ class UserInput extends StatelessWidget {
           Expanded(child: SizedBox.shrink(),),
           InputCard(child: Image.asset(userInput!.path)),
           Expanded(child: SizedBox.shrink(),),
-          
         ],
       );
     }
