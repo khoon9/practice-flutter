@@ -23,8 +23,6 @@ class _MyHomePageState extends State<MyHomePage>  with WidgetsBindingObserver {
 
   @override
   void initState() {
-    // addObserver 에 어떤 관찰할 대상 객체(WidgetsBindingObserver)를 넣어 주어야 한다.
-    // 그리고 그 객체는
     WidgetsBinding.instance.addObserver(this);
     detector = ShakeDetector.autoStart(onPhoneShake: (){
       setState(() {
@@ -71,9 +69,7 @@ class _MyHomePageState extends State<MyHomePage>  with WidgetsBindingObserver {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            NewWidget(),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -87,5 +83,18 @@ class _MyHomePageState extends State<MyHomePage>  with WidgetsBindingObserver {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text(
+            'You have pushed the button this many times:',
+          );
   }
 }
